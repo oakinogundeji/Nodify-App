@@ -1,0 +1,4 @@
+{
+  "apiKey": "process.env.SHOPIFY_API_KEY",
+  "secret": "process.env.SHOPIFY_SECRET"
+}
