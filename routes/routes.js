@@ -60,7 +60,7 @@ router.get('/', function(req, res) {
 		key = persistentKeys[shop];
 	}
 
-	if(shop !== undefined && key != undefined) {
+	if(shop && key) {
 		session = nodify.createSession(shop, apiKey, secret, key);
 		if(session.valid()) {
 			console.log('session is valid for <',shop,'>')
@@ -85,7 +85,7 @@ router.get('/', function(req, res) {
 		if(shop !== undefined)
 			return res.redirect('/login/authenticate?shop='+shop);
 		else
-			return res.redirect('/login');
+			return res.status(302).redirect('/login');
 	}
 });
 
@@ -100,10 +100,10 @@ router.get('/login', function(req, res) {
 	if(req.session.shopify){
 		return res.redirect("/");
 	}
-	if(shop != undefined) {
-		return res.redirect("/login/authenticate");
+	if(shop) {
+		return res.status(303).redirect("/login/authenticate");
 	}
-	return res.render("login", {title: "Nodify App"});
+	return res.status(200).render("login", {title: "Nodify App"});
 });
 
 router.get('/login/finalize', function(req, res) {
@@ -150,7 +150,7 @@ router.get('/logout', function(req, res) {
 		req.session.shopify = null;
 	}
 	console.log('Logged out!')
-	return res.redirect('/');
+	return res.status(302).redirect('/');
 });
 
 router.get('/plans', function(req, res) {
@@ -159,13 +159,13 @@ router.get('/plans', function(req, res) {
 		shop = req.session.shopify.shop
 	}
 
-	if(shop !== undefined && token !== undefined) {
+	if(shop && token) {
 		return res.render("plans", {
       title: "Nodify App Plans",
       current_shop: shop});
 	}
 	else {
-		return res.redirect('/login');
+		return res.status(302).redirect('/login');
 	}
 });
 
@@ -175,13 +175,13 @@ router.get('/faq', function(req, res) {
 		shop = req.session.shopify.shop
 	}
 
-	if(shop !== undefined && token !== undefined) {
+	if(shop && token) {
 		return res.render("faq", {
       title: "Nodify App FAQ",
       current_shop: shop});
 	}
 	else {
-		return res.redirect('/login');
+		return res.status(302).redirect('/login');
 	}
 });
 //==============================================================================

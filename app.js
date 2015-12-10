@@ -51,3 +51,9 @@ app.listen(port, function() {
 	console.log("Running on: ",port);
 });
 //==============================================================================
+/**
+*Conditionally export Module
+*/
+if(require.main != module) {
+  module.exports = app;
+}
