@@ -3,14 +3,14 @@
   "version": "0.0.1",
   "private": true,
   "scripts": {
-    "test": "cake test",
+    "test": "mocha",
     "preinstall": "rm -rf node_modules"
   },
+  "engines": {
+    "node": "4.x.x"
+  },
   "dependencies": {
-    "body-parser": "^1.14.1",
-    "cookie-parser": "^1.4.0",
     "express": "^4.13.3",
-    "express-session": "^1.12.1",
     "jade": ">= 0.0.1",
     "nodify-shopify": "git://github.com/Shopfrogs/Nodify.git"
   },
